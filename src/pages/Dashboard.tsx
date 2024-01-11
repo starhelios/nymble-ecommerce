@@ -1,21 +1,22 @@
-import FeedbackTable from '../../components/FeedbackTable';
-import InventoryTable from '../../components/InventoryTable';
-import { useStatsApi } from '../../hooks/useStats';
-import { useFeedbacksApi } from '../../hooks/useFeedbacks';
-import { useInventoriesApi } from '../../hooks/useInventories';
-import { useTopSellingPRoductApi } from '../../hooks/useTopSellingProductApi';
-import { useGetOrdersApi } from '../../hooks/useOrders';
-import TopSellingProductTable from '../../components/TopSellingProductTable';
-import { useGetOrderItemsApi } from '../../hooks/useOrderItems';
-import CardTwo from '../../components/CardTwo';
+import { useFeedbacksApi } from '../hooks/useFeedbacks';
+import { useGetOrderItemsApi } from '../hooks/useOrderItems';
+import { useGetOrdersApi } from '../hooks/useOrders';
+import { useInventoriesApi } from '../hooks/useInventories';
+import { useStatsApi } from '../hooks/useStats';
+import { useTopSellingProductApi } from '../hooks/useTopSellingProduct';
+import CardTwo from '../components/CardTwo';
+import FeedbackTable from '../components/FeedbackTable';
+import InventoryTable from '../components/InventoryTable';
+import TopSellingProductTable from '../components/TopSellingProductTable';
 
 const Dashboard = () => {
   const { stats, new_customers_percent } = useStatsApi()
   const { recentFeedbacks, feedbacks } = useFeedbacksApi()
   const { sortedInventory } = useInventoriesApi()
-  const { topSellingProducts } = useTopSellingPRoductApi()
+  const { topSellingProducts } = useTopSellingProductApi()
   const { orders } = useGetOrdersApi()
   const { totalSales } = useGetOrderItemsApi()
+
   return (
     <div className='h-[94vh] pb-10 overflow-auto'>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mt-4">
@@ -55,9 +56,6 @@ const Dashboard = () => {
           <TopSellingProductTable products={topSellingProducts} />
         </div>
       </div>
-
-
-
       <div className="mt-8">
         <div className="bg-transparent pb-2 pl-1">
           <h1 className="text-3xl font-bold text-gray-800">Inventories</h1>

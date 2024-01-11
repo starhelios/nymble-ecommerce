@@ -4,23 +4,22 @@ import { AuthContext } from '../context/AuthContext';
 import getOrderItems from '../services/orderItems';
 
 const useGetOrderItemsApi = () => {
+  const [totalSales,setSales] = useState(0)
   const { auth } = useContext(AuthContext);
-  const [totalSales,setSales]=useState(0)
   const { data, isPending } = useQuery({
     queryKey: ["orderItems"],
     queryFn: () => getOrderItems(auth?.access_token as string),
     enabled: auth && auth.access_token ? true : false,
     refetchInterval: (process.env.REACT_APP_POOLING_INTERVAL as unknown as number || 3) * 1000
   })
-  useEffect(()=>{
+
+  useEffect(() => {
     if(!data) return
-    let total=0
-    data.map(orderItem=>{
-      total=total + (orderItem.price * orderItem.quantity)
-    })
+    const total = data.reduce((a, c) => a + c.price * c.quantity, 0)
     setSales(total)
   },[data])
-  return { orderItems: data, loading: isPending,totalSales }
+
+  return { orderItems: data, loading: isPending, totalSales }
 }
 
 export { useGetOrderItemsApi }

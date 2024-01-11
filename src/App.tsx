@@ -11,19 +11,22 @@ import axios from "axios"
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL
 const queryClient = new QueryClient()
 function App() {
-  const { auth,updateAuth } = useContext(AuthContext);
+  const { auth, updateAuth } = useContext(AuthContext);
   const content = useRoutes(auth ? adminRoute : nonAuthRoute);
+
   useEffect(()=>{
     const response = localStorage.getItem("jwt")
     if(response){
       updateAuth({access_token:response})
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+
   return (
     <div className="App">
       <Toaster toastOptions={{ duration: 5000 }} />
       <QueryClientProvider client={queryClient}>
-      {content}
+        {content}
       </QueryClientProvider>
     </div>
   );

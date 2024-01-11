@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
-import { useMutation, useQuery } from "@tanstack/react-query"
-import getStats from '../services/stats'
+import { useContext } from 'react'
+import { useQuery } from "@tanstack/react-query"
 import { AuthContext } from '../context/AuthContext';
 import { calculatePercent } from '../utils/utlls';
+import getStats from '../services/stats'
 
 const useStatsApi = () => {
   const { auth } = useContext(AuthContext);
@@ -20,7 +20,8 @@ const useStatsApi = () => {
     newData: data?.total_sales_current_year,
     prevData: data?.total_sales_previous_year
   }) : { percentageChange: 0, status: "up" }
-  return { stats: data, isSignupLoading: isPending,new_customers_percent,new_saless }
+
+  return { stats: data, isSignupLoading: isPending, new_customers_percent, new_saless }
 }
 
 export { useStatsApi }

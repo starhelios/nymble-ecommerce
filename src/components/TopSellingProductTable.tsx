@@ -1,12 +1,13 @@
 import { FC } from "react";
-import { IFeedbacks, IGetInventories, IInventories, IProduct, IProductTopSelling, TGetTopSellingProduct } from "../types/services";
+import { IProductTopSelling } from "../types/services";
 
 export interface ITopSellintTableTableProps {
   products?: IProductTopSelling[]
 }
+
 const TopSellingProductTable: FC<ITopSellintTableTableProps> = ({ products }) => {
   return (
-    <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default   sm:px-7.5 xl:pb-1">
+    <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default sm:px-7.5 xl:pb-1">
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
@@ -27,28 +28,27 @@ const TopSellingProductTable: FC<ITopSellintTableTableProps> = ({ products }) =>
           </thead>
           <tbody>
             {
-              products?.map((product,index) => (
+              products?.map((product, index) => (
                 <tr key={product.id}>
-                  <td className={`${index===products.length-1?"":"border-b border-[#eee] "} w-[50px] `}>
-                      <img src={product.image} width={50} height={50} />
+                  <td className={`${index === products.length - 1 ? "" : "border-b border-[#eee] "} w-[50px]`}>
+                      <img src={product.image} width={50} height={50} alt="img" />
                   </td>
-                  <td className={`${index===products.length-1?"":"border-b border-[#eee] "} pl-4`}>
-                    <h5 className="font-medium text-black ">
+                  <td className={`${index === products.length - 1 ? "" : "border-b border-[#eee] "} pl-4`}>
+                    <h5 className="font-medium text-black">
                       {product.title}
                     </h5>
                   </td>
-                  <td className={`${index===products.length-1?"":"border-b border-[#eee] "} py-5 pl-4`}>
-                    <h5 className="font-medium text-black ">
+                  <td className={`${index === products.length - 1 ? "" : "border-b border-[#eee] "} py-5 pl-4`}>
+                    <h5 className="font-medium text-black">
                       $ {product.price}
                     </h5>
                   </td>
-                  <td className={`${index===products.length-1?"":"border-b border-[#eee] "} py-5 pl-4`}>
-                    <h5 className="font-medium text-black ">
+                  <td className={`${index === products.length - 1 ? "" : "border-b border-[#eee] "} py-5 pl-4`}>
+                    <h5 className="font-medium text-black">
                       $ {product.price * product.total_sold}
                     </h5>
                   </td>
                 </tr>
-
               ))
             }
           </tbody>

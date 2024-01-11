@@ -1,12 +1,11 @@
-// LoginForm.js
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
-import { useLogin } from '../../hooks/useLogin';
+import { useLogin } from '../hooks/useLogin';
 
 const LoginForm = () => {
-  const {login}=useLogin()
+  const {login} = useLogin()
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required'),
     password: Yup.string().required('Required'),
@@ -19,7 +18,6 @@ const LoginForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log("=====",values)
       login(values)
     },
   });

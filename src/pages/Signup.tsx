@@ -1,9 +1,8 @@
-// LoginForm.js
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
-import { useSignup } from '../../hooks/useSignup';
+import { useSignup } from '../hooks/useSignup';
 
 const SignupForm = () => {
   const { signup } = useSignup()
@@ -26,7 +25,6 @@ const SignupForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log("=====", values)
       signup(values)
     },
   });
@@ -36,7 +34,6 @@ const SignupForm = () => {
       <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-semibold mb-6">Signup</h2>
         <form onSubmit={formik.handleSubmit}>
-
           <div className="mb-4">
             <label htmlFor="first_name" className="block text-gray-600">First Name</label>
             <input
@@ -49,7 +46,6 @@ const SignupForm = () => {
               <div className="text-red-500">{formik.errors.first_name}</div>
             ) : null}
           </div>
-
           <div className="mb-4">
             <label htmlFor="last_name" className="block text-gray-600">Last Name</label>
             <input
@@ -62,7 +58,6 @@ const SignupForm = () => {
               <div className="text-red-500">{formik.errors.last_name}</div>
             ) : null}
           </div>
-
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-600">Email</label>
             <input
@@ -75,7 +70,6 @@ const SignupForm = () => {
               <div className="text-red-500">{formik.errors.email}</div>
             ) : null}
           </div>
-
           <div className="mb-4">
             <label htmlFor="password" className="block text-gray-600">Password</label>
             <input
